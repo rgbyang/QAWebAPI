@@ -1,3 +1,6 @@
+## Overview
+This is a WebAPI project that encapsulates the LLM Question and Answer system. You can ask questions for a specified context by http methods. Supports multiple rounds of questioning and answering in a chat. Supports multiple chats in same time. Supports Chinese and English. Using the langchain methods to load context documents and split them. Using the torch to embed context. Using the Chroma of langchain to generate and load the vector DB. Using the langchain.memory and the langchain ConversationalRetrievalChain to support multiple rounds of questioning and answering. Using the transformers model from huggingface.
+
 ## Getting Started
 1. Put the expected context *.txt files to folder "QuestionAnswer\docs\Context"
 2. Run this project by Django
