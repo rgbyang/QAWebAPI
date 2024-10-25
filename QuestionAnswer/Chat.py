@@ -19,7 +19,11 @@ from langchain.chains import RetrievalQA
 from .LLMHuggingFaceLocal import LLMHuggingFaceLocal
 from langchain.prompts import PromptTemplate
 import langchain
+from langchain_openai import AzureChatOpenAI
+import os
+
 langchain.debug = True
+
 class Chat:
     def __init__(self, model_name: str, basic_DB_path: str, DB_version: str):
         # 加载之前生成的向量DB
@@ -31,7 +35,21 @@ class Chat:
         )
 
         # 初始化链
-        llm = LLMHuggingFaceLocal()
+        # llm = LLMHuggingFaceLocal()
+        llm = AzureChatOpenAI(
+            temperature=0.5,
+            seed=42,
+            max_tokens=4096,
+            top_p=0.6,
+            frequency_penalty=0,
+            presence_penalty=0,
+            stop=None,
+            deployment_name=os.environ["CHAT_MODEL_NAME"],
+            api_key=os.environ["AZURE_OPENAI_KEY"],
+            azure_endpoint=os.environ["AZURE_OPENAI_BASE"],
+            api_version=os.environ["AZURE_OPENAI_VERSION"]
+        )
+        
         from langchain.memory import ConversationBufferMemory
         memory = ConversationBufferMemory(
             memory_key="chat_history",

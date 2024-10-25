@@ -42,7 +42,7 @@ class Vectorization:
         splits = r_splitter.split_documents(docs)
 
         # 用本地HuggingFace模型初始化Embeddings
-        model_name = "bert-base-chinese"
+        model_name = os.environ["VECTORIZATION_MODEL_NAME"]#"bert-base-chinese"
         local_embeddings = EmbeddingsLocalHuggingFace(model_name)
 
         # 使用 Chroma 创建嵌入索引

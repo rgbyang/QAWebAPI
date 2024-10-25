@@ -19,6 +19,7 @@ from QuestionAnswer.Chat import Chat as QAChat
 import uuid
 from .global_initializer import global_lock
 from .global_initializer import global_chats
+import os
 
 class Chat(APIView):
     def get(self, request, *args, **kwargs):
@@ -44,7 +45,7 @@ class Chat(APIView):
         input = request.data
         action = input.get('action')
         if action == "init":
-            model_name = "bert-base-chinese"
+            model_name = os.environ["VECTORIZATION_MODEL_NAME"]#"bert-base-chinese"
             if input.get('model_name') is not None:
                 model_name = input.get('model_name')
             basic_DB_path = 'QuestionAnswer/docs/chroma'
